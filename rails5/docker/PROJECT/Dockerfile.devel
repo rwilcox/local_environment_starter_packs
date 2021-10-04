@@ -1,0 +1,18 @@
+FROM ruby:2.5.0
+
+ENV NODE_VERSION 12.22.6
+ENV ARCH 'x64'
+
+
+RUN apt-get update
+# RUN apt-get install -y mysql-client libmysqlclient-dev
+RUN apt-get install -y graphviz
+
+RUN curl -fsSLO "https://nodejs.org/dist/v$NODE_VERSION/node-v$NODE_VERSION-linux-$ARCH.tar.xz" && \
+    tar -xJf "node-v$NODE_VERSION-linux-$ARCH.tar.xz" -C /usr/local --strip-components=1 --no-same-owner && \
+    rm "node-v$NODE_VERSION-linux-$ARCH.tar.xz" && \
+    ln -s /usr/local/bin/node /usr/local/bin/nodejs
+
+RUN gem install rails --version 5.2.6
+
+CMD ["tail", "-f", "/dev/null"]

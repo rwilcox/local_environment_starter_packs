@@ -1,0 +1,15 @@
+version: '2'
+services:
+  rails:
+    ports:
+      - '3000:3000'
+    volumes:
+      - .:/app
+    build:
+      dockerfile: docker/PROJECT/Dockerfile.devel
+      context: .
+
+  mysql:
+    image: mysql
+    environment:
+      - MYSQL_ALLOW_EMPTY_PASSWORD=yes
